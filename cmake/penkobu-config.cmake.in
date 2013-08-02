@@ -1,0 +1,54 @@
+# PenKobu CMake config file
+#
+# This file sets the following variables:
+# PenKobu_FOUND - Always TRUE.
+# PenKobu_INCLUDE_DIRS - Directories containing the PenKobu include files.
+# PenKobu_IDL_DIRS - Directories containing the PenKobu IDL files.
+# PenKobu_LIBRARIES - Libraries needed to use PenKobu.
+# PenKobu_DEFINITIONS - Compiler flags for PenKobu.
+# PenKobu_VERSION - The version of PenKobu found.
+# PenKobu_VERSION_MAJOR - The major version of PenKobu found.
+# PenKobu_VERSION_MINOR - The minor version of PenKobu found.
+# PenKobu_VERSION_REVISION - The revision version of PenKobu found.
+# PenKobu_VERSION_CANDIDATE - The candidate version of PenKobu found.
+
+message(STATUS "Found PenKobu-@PROJECT_VERSION@")
+set(PenKobu_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(PenKobu_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(PenKobu_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(PenKobu_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(PenKobu_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(PenKobu_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(PenKobu_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(PenKobu_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(PenKobu_VERSION @PROJECT_VERSION@)
+set(PenKobu_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(PenKobu_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(PenKobu_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(PenKobu_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+

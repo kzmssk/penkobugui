@@ -1,0 +1,4 @@
+interface RunButton_IDL{
+	void flush();
+	void clear();
+};

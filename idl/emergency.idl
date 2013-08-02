@@ -1,0 +1,3 @@
+interface Emergency_IDL{
+	void emergency();
+};
