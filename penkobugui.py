@@ -19,7 +19,6 @@ class PenKobuGui(Frame):
 		#paint area
 		self.c0=Canvas(self, width='500', height='600')
 		self.c0.grid(row=0, column=0, rowspan=4)
-				
 		self.id=self.c0.create_oval(10,10,15,15, fill="#000000")
 		
 		#run button
@@ -68,8 +67,8 @@ class PenKobuGui(Frame):
 		#case of end paint	
 		if self.onPaint==False and self.onPaintTmp==True:
 			print "====end painting==="
-			for c in self.id_list:
-				self.c0.delete(c)
+#			for c in self.id_list:
+#				self.c0.delete(c)
 			
 		#draw info (x, y, p)
 		self.draw_info()
@@ -101,7 +100,8 @@ class PenKobuGui(Frame):
 	def on_clear_button(self):
 		print 'pressed clear button'
 		self.svcPort._ptr().clear()
-		self.c0.delete(self.line_id)
+		for c in self.id_list:
+			self.c0.delete(c)
 		
 	def emergency(self):
 		print "case of emergency"
